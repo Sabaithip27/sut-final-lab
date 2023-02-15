@@ -7,17 +7,16 @@ import (
 	"github.com/onsi/gomega"
 )
 
-func Test_customer(t *testing.T) {
+func Test_Pass(t *testing.T) {
 	g := gomega.NewGomegaWithT(t)
 
 	cu := Customer{
 		Name:       "sabaithip",
 		Email:      "sabaithip@gmail.com",
-		CustomerID: "C123",
+		CustomerID: "H1234567",
 	}
 
 	ok, err := govalidator.ValidateStruct(cu)
-	g.Expect(ok).NotTo(gomega.BeTrue())
-	g.Expect(err).ToNot(gomega.BeNil())
-	g.Expect(err.Error()).To(gomega.Equal("กรุณาใส่  CustomerID ให้ถูกต้อง"))
+	g.Expect(ok).To(gomega.BeTrue())
+	g.Expect(err).To(gomega.BeNil())
 }

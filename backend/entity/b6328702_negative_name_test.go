@@ -11,8 +11,8 @@ import (
 type Customer struct {
 	gorm.Model
 	Name       string `valid:"required~Name Not Null"`
-	Email      string `valid:"email"`
-	CustomerID string `valid:"matches(^[H|L|M]\\d{7}$)~aa"`
+	Email      string
+	CustomerID string `gorm:"uniqueIndex" valid:"matches(^[H|L|M]\\d{7}$)~กรุณาใส่  CustomerID ให้ถูกต้อง"`
 }
 
 func Test_NameNotNull(t *testing.T) {
@@ -26,6 +26,7 @@ func Test_NameNotNull(t *testing.T) {
 
 	ok, err := govalidator.ValidateStruct(cu)
 	g.Expect(ok).NotTo(gomega.BeTrue())
+	g.Expect(err).ToNot(gomega.BeNil())
 	g.Expect(err.Error()).To(gomega.Equal("Name Not Null"))
 }
 
